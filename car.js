@@ -52,22 +52,25 @@ class Car {
   drive(speed, hours) {
     if (typeof speed !== 'number' || speed <= 0)
       throw new Error('Неверная скорость');
+    
     else if (typeof hours !== 'number' || hours <= 0)
       throw new Error('Неверное количество часов');
+    
     else if (speed > this.#maxSpeed)
       throw new Error('Машина не может ехать так быстро');
+    
     else if (this.#isStarted === false)
       throw new Error('Машина должна быть заведена, чтобы ехать');
+    
     else if (
       this.#currentFuelVolume <
       (this.#fuelConsumption * hours * speed) / 100
     )
       throw new Error('Недостаточно топлива');
-    else {
-      (this.#mileage += hours * speed),
-        (this.#currentFuelVolume -=
-          (this.#fuelConsumption * hours * speed) / 100);
-    }
+
+    (this.#mileage += hours * speed),
+      (this.#currentFuelVolume -=
+        (this.#fuelConsumption * hours * speed) / 100);
   }
 
   get brand() {
@@ -88,6 +91,7 @@ class Car {
   set model(value) {
     if (value.length < 1 || value.length > 50)
       throw new Error('Несуществующее название модели!');
+    
     this.#model = value;
   }
 
@@ -98,6 +102,7 @@ class Car {
   set yearOfManufacturing(value) {
     if (value > new Date().getFullYear() || value < 1900)
       throw new Error('Некорректный год выпуска автомобиля!');
+    
     this.#yearOfManufacturing = value;
   }
 
@@ -108,6 +113,7 @@ class Car {
   set maxSpeed(value) {
     if (value < 100 || value > 300)
       throw new Error('Некорректная максимальная скорость автомобиля!');
+    
     this.#maxSpeed = value;
   }
 
@@ -118,6 +124,7 @@ class Car {
   set maxFuelVolume(value) {
     if (value < 5 || value > 20)
       throw new Error('Некорректный максимальный объем бензобака!');
+    
     this.#maxFuelVolume = value;
   }
 
@@ -128,6 +135,7 @@ class Car {
   set fuelConsumption(value) {
     if (typeof value !== 'number')
       throw new Error('Некорректный расход бензина!');
+    
     this.#fuelConsumption = value;
   }
 
@@ -144,7 +152,7 @@ class Car {
   }
 }
 
-// let car = new Car('Toyota', 'Camry', 2012, 220, 20, 5, 0, false, 0);
+let car = new Car('Toyota', 'Camry', 2012, 220, 20, 5, 0, false, 0);
 
 // car.brand = 'Hyundai';
 // car.model = 'Kona';
